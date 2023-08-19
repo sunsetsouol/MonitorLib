@@ -1,4 +1,4 @@
-package com.qgstudio;
+package com.qgstudio.websocket;
 
 
 import io.netty.channel.ChannelInitializer;

@@ -1,14 +1,27 @@
 package com.qgstudio;
 
+
+
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.read.ListAppender;
+
+import org.slf4j.LoggerFactory;
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        MyLogger myLogger = new MyLogger();
-        Scanner scanner = new Scanner(System.in);
-        while (true){
-            myLogger.info(scanner.nextLine());
-        }
+        Logger logger = (Logger) LoggerFactory.getLogger(Main.class);
+        ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
+        listAppender.setContext(((LoggerContext) LoggerFactory.getILoggerFactory()));
+        listAppender.start();
+        logger.addAppender(listAppender);
+        logger.info("hello");
+        listAppender.list.forEach(event ->{
+            System.out.println(event.getLoggerName());
+        });
 
 //        try (WebsocketClient websocketClient = new WebsocketClient("http://localhost:8081/websocket1")) {
 //            // 连接

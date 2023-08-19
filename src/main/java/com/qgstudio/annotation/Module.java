@@ -13,11 +13,7 @@ import java.lang.annotation.Target;
  * 模块注解
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD,ElementType.TYPE})
+@Target({ElementType.METHOD})
 public @interface Module {
-    @NotNull
-    String value();
 
-    @NotNull
-    String apiKey();
 }

@@ -1,4 +1,4 @@
-package com.qgstudio;
+package com.qgstudio.websocket;
 
 import io.netty.channel.*;
 import io.netty.handler.codec.http.FullHttpResponse;
@@ -102,6 +102,7 @@ public class WebsocketClientHandler extends SimpleChannelInboundHandler<Object> 
      */
     private void handleWebSocketFrame(Object msg) {
         WebSocketFrame frame = (WebSocketFrame) msg;
+        System.out.println(msg);
         if (frame instanceof TextWebSocketFrame) {
             TextWebSocketFrame textFrame = (TextWebSocketFrame) frame;
             // ...自定义
@@ -123,58 +124,6 @@ public class WebsocketClientHandler extends SimpleChannelInboundHandler<Object> 
         System.out.println("监控触发异常=>{}"+ cause.getMessage()+ cause);
     }
 
-//    private WebSocketClientHandshaker webSocketClientHandshaker;
-//
-//    private ChannelPromise handshakeFuture;
-//
-//    private Channel channel;
-//    public WebsocketClientHandler(WebSocketClientHandshaker webSocketClientHandshaker) {
-//        this.webSocketClientHandshaker = webSocketClientHandshaker;
-//    }
-//
-//    public ChannelFuture handshakeFuture() {
-//        return handshakeFuture;
-//    }
-//
-//    @Override
-//    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-//        handshakeFuture=ctx.newPromise();
-//    }
-//
-//    @Override
-//    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-//        System.out.println("连接断开");
-//    }
-//
-//
-//    @Override
-//    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-//        channel=ctx.channel();
-//        webSocketClientHandshaker.handshake(channel);
-//        System.out.println("建立连接");
-//    }
-//
-//    @Override
-//    protected void channelRead0(ChannelHandlerContext channelHandlerContext, Object msg) throws Exception {
-//        if (!webSocketClientHandshaker.isHandshakeComplete()){
-//            this.handleHttpRequest(msg);
-//            System.out.println("websocket已经建立连接");
-//            return;
-//        }
-//        WebSocketFrame frame = (WebSocketFrame) msg;
-//        if (frame instanceof TextWebSocketFrame){
-//            TextWebSocketFrame testFrame = (TextWebSocketFrame) frame;
-//            System.out.println("收到消息" + testFrame.text());
-//        }else {
-//            if (frame instanceof CloseWebSocketFrame){
-//                System.out.println("收到关闭帧");
-//                channel.close();
-//            }
-//        }
-//    }
-//
-//    private void handleHttpRequest(Object msg) {
-//        webSocketClientHandshaker.finishHandshake(channel, ((FullHttpResponse) msg));
-//        handshakeFuture.setSuccess();
-//    }
+
+
 }

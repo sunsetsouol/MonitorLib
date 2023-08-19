@@ -1,4 +1,4 @@
-package com.qgstudio;
+package com.qgstudio.websocket;
 
 import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
@@ -8,15 +8,8 @@ import java.io.IOException;
 
 public abstract class AbstractWebsocketClient implements Closeable {
 
-    public void send(String message) throws Exception {
-        System.out.println("send");
+    public void send(String message)  {
         Channel channel = getChannel();
-        if (!channel.isActive()){
-            System.out.println("reshake");
-            connect();
-        }
-
-        System.out.println("write");
         channel.writeAndFlush(new TextWebSocketFrame(message));
 
     }
